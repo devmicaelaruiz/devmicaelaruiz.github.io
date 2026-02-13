@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Time: Pop Over</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #f8fafc; }
+        .time-test-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timer-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            border-bottom: 5px solid #198754;
+            max-width: 450px;
+            width: 100%;
+        }
+        .counter-circle {
+            width: 120px;
+            height: 120px;
+            border: 8px solid #f0fff4;
+            border-top-color: #198754;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #198754;
+        }
+    </style>
+</head>
+<body>
+
+<div class="time-test-container">
+    <div class="card timer-box shadow-lg text-center">
+        <span class="badge bg-success mb-3">Ticket 2579</span>
+        <h2 class="fw-bold text-success">Trigger: Tiempo (15s)</h2>
+        <p class="text-muted small">
+            El <strong>Pop Over</strong> se activará automáticamente tras 15 segundos de permanencia en esta página.
+        </p>
+
+        <div class="counter-circle" id="visual-timer">0</div>
+        
+        <p id="timer-msg" class="text-secondary fw-bold">Analizando sesión...</p>
+
+        <div class="mt-5 pt-3 border-top">
+            <a href="../../index.html" class="text-muted small text-decoration-none">
+                ← Regresar a la Matriz Principal
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let secondsElapsed = 0;
+    const triggerThreshold = 15;
+    const timerElement = document.getElementById('visual-timer');
+    const msgElement = document.getElementById('timer-msg');
+
+    const timerInterval = setInterval(() => {
+        secondsElapsed++;
+        timerElement.innerText = secondsElapsed;
+
+        if (secondsElapsed >= triggerThreshold) {
+            msgElement.innerText = "¡Tiempo cumplido! Disparando Pop Over...";
+            msgElement.classList.replace('text-secondary', 'text-success');
+            console.log("LOG [Ticket 2579]: Se han alcanzado los 15 segundos de permanencia.");
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+</script>
+<!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn29tbujbtbh0fw1b-inferencelabssandbox.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_29tBuJBTBh0fw1b")).start()}catch(i){}})();
+
+</script><div id='ZN_29tBuJBTBh0fw1b'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+
+<!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
+</html>
