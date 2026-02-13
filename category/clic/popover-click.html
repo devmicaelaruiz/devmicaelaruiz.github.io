@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Click: Pop Over</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #fcfcfc; }
+        .test-area {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popover-card {
+            border: 2px dashed #198754;
+            border-radius: 20px;
+            background-color: #f8fff9;
+        }
+        .btn-popover {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-popover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container test-area">
+    <div class="card popover-card p-5 text-center shadow-sm">
+        <div class="mb-4">
+            <span class="badge bg-success mb-2">Ticket 2579</span>
+            <h2 class="fw-bold text-success">Trigger: Pop Over via Click</h2>
+            <p class="text-muted">Este escenario valida que el creativo tipo <strong>Pop Over</strong> se dispare al interactuar con un elemento específico.</p>
+        </div>
+
+        <button id="trigger-popover-event" class="btn btn-success btn-popover fw-bold">
+            Mostrar Pop Over
+        </button>
+
+        <div class="mt-5 pt-3 border-top">
+            <!--<p class="small text-muted">Asegúrate de que en Qualtrics el Intercept esté configurado para detectar el clic en el ID: <code>trigger-popover-event</code></p>-->
+            <a href="../../index.html" class="btn btn-link btn-sm text-decoration-none text-muted">
+                ← Volver al Panel Central
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Registro para validación de flujo de eventos
+    document.getElementById('trigger-popover-event').addEventListener('click', function() {
+        console.log("LOG [Ticket 2579]: Click detectado en el disparador del Pop Over.");
+        console.log("Verificando carga de Qualtrics...");
+    });
+</script>
+<!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn29tbujbtbh0fw1b-inferencelabssandbox.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_29tBuJBTBh0fw1b")).start()}catch(i){}})();
+
+</script><div id='ZN_29tBuJBTBh0fw1b'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+
+<!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
+</html>
