@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Reload: Slider</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #fff9db; } /* Amarillo muy claro para Slider */
+        .reload-wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider-status-card {
+            border-radius: 20px;
+            border-left: 8px solid #ffc107;
+            background: white;
+            max-width: 500px;
+        }
+        .pulse-animation {
+            width: 20px;
+            height: 20px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+            margin-right: 10px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="reload-wrapper">
+    <div class="card slider-status-card shadow-lg p-5 text-center">
+        <div class="mb-4">
+            <div class="pulse-animation"></div>
+            <span class="badge bg-warning text-dark">Ticket 2579</span>
+        </div>
+        
+        <h2 class="fw-bold text-dark">Trigger: Slider On-Load</h2>
+        <p class="text-muted">
+            Este escenario valida que el creativo tipo <strong>Slider</strong> aparezca automáticamente 
+            (deslizándose desde un lateral) al cargar la página.
+        </p>
+
+        <div class="alert alert-warning border-0 mt-4 small">
+            <strong>Estado:</strong> <span id="load-msg">Esperando ciclo de carga...</span>
+        </div>
+
+        <button onclick="location.reload()" class="btn btn-warning mt-3 fw-bold">
+            Recargar Página
+        </button>
+
+        <div class="mt-5 pt-3 border-top">
+            <a href="../../index.html" class="text-secondary small text-decoration-none">
+                ← Regresar a la Matriz Principal
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Monitor de carga para Ingeniería de Datos
+    window.addEventListener('load', function() {
+        console.log("LOG [Ticket 2579]: Página cargada. Verificando Slider...");
+        document.getElementById('load-msg').innerText = "Carga completa. Qualtrics debería deslizar el Slider.";
+    });
+</script>
+<!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn29tbujbtbh0fw1b-inferencelabssandbox.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_29tBuJBTBh0fw1b")).start()}catch(i){}})();
+
+</script><div id='ZN_29tBuJBTBh0fw1b'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+
+<!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
+</html>
