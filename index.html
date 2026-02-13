@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualtrics Lab - Matriz de Creatives</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; padding-top: 50px; }
+        .matrix-card { border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn-test { width: 100%; font-size: 0.8rem; margin-bottom: 5px; }
+        th { background-color: salmon !important; color: white; text-align: center; }
+        .category-header { background-color: #e9ecef; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-5 fw-bold text-primary">Laboratorio de Interceptos Qualtrics</h1>
+            <p class="lead">Casos de Prueba</p>
+        </div>
+    </div>
+
+    <div class="card matrix-card">
+        <div class="card-body p-0">
+            <table class="table table-bordered mb-0">
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="align-middle">Active Creatives</th>
+                        <th>Interacción</th>
+                        <th>Refrescar / Vistas</th>
+                        <th colspan="2">Navegación</th>
+                    </tr>
+                    <tr>
+                        <th class="category-header">Clic en Botón</th>
+                        <th class="category-header">Page Reload</th>
+                        <th class="category-header">Scroll (>50%)</th>
+                        <th class="category-header">Time (>15s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">Responsive Dialog</td>
+                        <td><a href="category/clic/dialog-click.html" class="btn btn-outline-primary btn-test">Abrir</a></td>
+                        <td><a href="category/refresh/dialog-reload.html" class="btn btn-outline-primary btn-test">Abrir</a></td>
+                        <td><a href="category/scroll/dialog-scroll.html" class="btn btn-outline-primary btn-test">Abrir</a></td>
+                        <td><a href="category/time/dialog-time.html" class="btn btn-outline-primary btn-test">Abrir</a></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Pop Over</td>
+                        <td><a href="category/clic/popover-click.html" class="btn btn-outline-success btn-test">Abrir</a></td>
+                        <td><a href="category/refresh/popover-reload.html" class="btn btn-outline-success btn-test">Abrir</a></td>
+                        <td><a href="category/scroll/popover-scroll.html" class="btn btn-outline-success btn-test">Abrir</a></td>
+                        <td><a href="category/time/popover-time.html" class="btn btn-outline-success btn-test">Abrir</a></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Slider</td>
+                        <td><a href="category/clic/slider-click.html" class="btn btn-outline-warning btn-test">Abrir</a></td>
+                        <td><a href="category/refresh/slider-reload.html" class="btn btn-outline-warning btn-test">Abrir</a></td>
+                        <td><a href="category/scroll/slider-scroll.html" class="btn btn-outline-warning btn-test">Abrir</a></td>
+                        <td><a href="category/time/slider-time.html" class="btn btn-outline-warning btn-test">Abrir</a></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Pop Under</td>
+                        <td><a href="category/clic/popunder-click.html" class="btn btn-outline-danger btn-test">Abrir</a></td>
+                        <td><a href="category/refresh/popunder-reload.html" class="btn btn-outline-danger btn-test">Abrir</a></td>
+                        <td><a href="category/scroll/popunder-scroll.html" class="btn btn-outline-danger btn-test">Abrir</a></td>
+                        <td><a href="category/time/popunder-time.html" class="btn btn-outline-danger btn-test">Abrir</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center mt-5 text-muted">
+    <small>Ticket 2579</small>
+</footer>
+
+</body>
+</html>
