@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Time: Slider</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #fff9db; }
+        .timer-layout {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timer-card-slider {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            border-right: 10px solid #ffc107;
+            max-width: 480px;
+            width: 100%;
+        }
+        .clock-icon {
+            font-size: 3rem;
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+        .big-number {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #333;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="timer-layout">
+    <div class="card timer-card-slider shadow-lg text-center">
+        <div class="clock-icon">⏱</div>
+        <span class="badge bg-warning text-dark mb-2">Ticket 2579</span>
+        <h2 class="fw-bold">Trigger: Slider por Tiempo</h2>
+        <p class="text-muted">El <strong>Slider</strong> aparecerá automáticamente tras 15 segundos de permanencia activa.</p>
+
+        <div class="big-number my-3" id="clock">0</div>
+        
+        <div class="progress mb-3" style="height: 15px;">
+            <div id="bar" class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+        </div>
+
+        <p id="msg" class="small fw-bold text-muted">ANALIZANDO ENGAGEMENT...</p>
+
+        <div class="mt-4 pt-3 border-top">
+            <a href="../../index.html" class="btn btn-link btn-sm text-secondary">
+                ← Volver al Panel de Control
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let elapsed = 0;
+    const limit = 15;
+    const clockEl = document.getElementById('clock');
+    const barEl = document.getElementById('bar');
+    const msgEl = document.getElementById('msg');
+
+    const interval = setInterval(() => {
+        elapsed++;
+        clockEl.innerText = elapsed;
+        
+        let progress = (elapsed / limit) * 100;
+        barEl.style.width = Math.min(progress, 100) + "%";
+
+        if (elapsed >= limit) {
+            msgEl.innerText = "¡TIEMPO ALCANZADO! EL SLIDER DEBE DESLIZARSE.";
+            msgEl.classList.replace('text-muted', 'text-warning');
+            console.log("LOG [Ticket 2579]: 15 segundos cumplidos. Validando Intercept de Slider.");
+            clearInterval(interval);
+        }
+    }, 1000);
+</script>
+<!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn29tbujbtbh0fw1b-inferencelabssandbox.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_29tBuJBTBh0fw1b")).start()}catch(i){}})();
+
+</script><div id='ZN_29tBuJBTBh0fw1b'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+
+<!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
+</html>
