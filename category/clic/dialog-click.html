@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Click: Responsive Dialog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            background: #eef2f7; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .test-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .btn-dialog {
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn-dialog:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card test-card p-5">
+                <div class="mb-4">
+                    <h2 class="fw-bold">Trigger: Responsive Dialog</h2>
+                    <p class="text-muted">Este test valida que el diálogo se ajuste correctamente a diferentes tamaños de pantalla tras el clic.</p>
+                </div>
+
+                <button id="btn-trigger-dialog" class="btn btn-primary btn-dialog shadow-sm">
+                    Ver Encuesta (Dialog)
+                </button>
+
+                <div class="mt-5 border-top pt-4">
+                    <a href="../../index.html" class="btn btn-link btn-sm text-decoration-none text-muted">
+                        ← Regresar al Menú Principal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Registro de actividad para trazabilidad del Ingeniero de Datos
+    document.getElementById('btn-trigger-dialog').addEventListener('click', function() {
+        console.log("LOG: Clic detectado en #btn-trigger-dialog");
+        console.log("STATUS: Esperando que el Intercept de Qualtrics valide la lógica del evento.");
+    });
+</script>
+
+<!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn29tbujbtbh0fw1b-inferencelabssandbox.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_29tBuJBTBh0fw1b")).start()}catch(i){}})();
+
+</script><div id='ZN_29tBuJBTBh0fw1b'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+
+<!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
+</html>
