@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Reload: Responsive Dialog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #f0f4f8; }
+        .reload-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .status-card {
+            border-radius: 15px;
+            border-left: 5px solid #0d6efd;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0d6efd;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="container reload-container">
+    <div class="card status-card shadow-sm p-5 text-center" style="max-width: 500px;">
+        <h2 class="fw-bold text-primary">Momento: Page Reload</h2>
+        <p class="text-muted">
+            Este test valida el disparo automático del <strong>Responsive Dialog</strong> 
+            inmediatamente después de que la página termina de cargar.
+        </p>
+
+        <div class="alert alert-light border mt-4">
+            <div class="loader me-2"></div>
+            <span id="status-text">Esperando al intercepto...</span>
+        </div>
+
+        <button onclick="location.reload()" class="btn btn-outline-primary btn-sm mt-3">
+            Forzar Recarga Manual
+        </button>
+
+        <div class="mt-4 pt-3 border-top">
+            <a href="../../index.html" class="text-secondary small text-decoration-none">
+                ← Regresar a la Matriz
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Registro para verificar el ciclo de vida de la página
+    window.addEventListener('load', function() {
+        console.log("DOM completamente cargado y parseado.");
+        document.getElementById('status-text').innerText = "Página cargada. Qualtrics debería ejecutarse.";
+    });
+</script>
+<!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn29tbujbtbh0fw1b-inferencelabssandbox.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_29tBuJBTBh0fw1b")).start()}catch(i){}})();
+
+</script><div id='ZN_29tBuJBTBh0fw1b'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+
+<!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
+</html>
