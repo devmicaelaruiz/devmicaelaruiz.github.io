@@ -2,24 +2,465 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Prueba Encuesta Qualtrics</title>
-</head>
-<body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
+    
+    <style>
+        /* ===== ESTILOS DE LA PÁGINA ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        #btn-encuesta {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        #btn-encuesta:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+        }
+
+        #btn-encuesta:active {
+            transform: translateY(0);
+        }
+
+        /* ================================================
+           ESTILOS PARA QUALTRICS POP OVER - RESPONSIVE
+           ================================================ */
+        
+        /* Container principal del popup (creado por Qualtrics) */
+        div[id*="QSI"],
+        div[class*="QSI"],
+        .SI_PopOver {
+            box-sizing: border-box !important;
+        }
+
+        /* ===== MOBILE: hasta 600px ===== */
+        @media screen and (max-width: 600px) {
+            
+            /* Todos los posibles containers de Qualtrics */
+            div[id*="QSI"][id*="PopOver"],
+            div[class*="QSI"][class*="PopOver"],
+            div[id^="QSI_PopOver"],
+            div[class^="SI_PopOver"],
+            .QSIPopOver,
+            #QSIPopOverContainer {
+                position: fixed !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border-radius: 0 !important;
+                transform: none !important;
+                overflow: hidden !important;
+                z-index: 2147483647 !important;
+                box-shadow: none !important;
+            }
+
+            /* Iframe de la encuesta */
+            div[id*="QSI"] iframe,
+            div[class*="QSI"] iframe,
+            .QSIPopOver iframe {
+                width: 100vw !important;
+                height: 100vh !important;
+                min-width: 100vw !important;
+                min-height: 100vh !important;
+                max-width: 100vw !important;
+                max-height: 100vh !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+
+            /* Shadow/Backdrop oscuro detrás del popup */
+            div[id*="QSI"] ~ div[style*="background"],
+            div[id*="Shadow"],
+            div[class*="Shadow"],
+            .SI_PopOverShadow {
+                position: fixed !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+
+            /* Botón de cerrar - más grande y visible */
+            div[id*="QSI"] a[onclick*="Close"],
+            div[id*="QSI"] a[onclick*="close"],
+            div[id*="QSI"] img[alt*="Close"],
+            div[id*="QSI"] > a:first-of-type,
+            .QSIPopOverCloseButton {
+                position: fixed !important;
+                top: 10px !important;
+                right: 10px !important;
+                z-index: 2147483647 !important;
+                width: 48px !important;
+                height: 48px !important;
+                min-width: 48px !important;
+                min-height: 48px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: rgba(255, 255, 255, 0.95) !important;
+                border-radius: 50% !important;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+                cursor: pointer !important;
+                border: 2px solid rgba(0,0,0,0.1) !important;
+            }
+
+            /* Imagen del botón cerrar */
+            div[id*="QSI"] img[alt*="Close"] {
+                max-width: 24px !important;
+                max-height: 24px !important;
+                width: 24px !important;
+                height: 24px !important;
+            }
+        }
+
+        /* ===== TABLET: 601px a 900px ===== */
+        @media screen and (min-width: 601px) and (max-width: 900px) {
+            div[id*="QSI"][id*="PopOver"],
+            div[class*="QSI"][class*="PopOver"],
+            .QSIPopOver {
+                width: 90vw !important;
+                max-width: 650px !important;
+                height: auto !important;
+                max-height: 90vh !important;
+                position: fixed !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                border-radius: 12px !important;
+                overflow: hidden !important;
+            }
+
+            div[id*="QSI"] iframe,
+            .QSIPopOver iframe {
+                width: 100% !important;
+                height: 550px !important;
+                max-height: 85vh !important;
+                border: none !important;
+            }
+        }
+
+        /* ===== DESKTOP: más de 900px ===== */
+        @media screen and (min-width: 901px) {
+            div[id*="QSI"][id*="PopOver"],
+            div[class*="QSI"][class*="PopOver"],
+            .QSIPopOver {
+                width: 700px !important;
+                max-width: 90vw !important;
+                height: auto !important;
+                max-height: 90vh !important;
+                position: fixed !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                border-radius: 16px !important;
+                overflow: hidden !important;
+            }
+
+            div[id*="QSI"] iframe,
+            .QSIPopOver iframe {
+                width: 100% !important;
+                height: 600px !important;
+                max-height: 80vh !important;
+                border: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
     <h1>Prueba de Integración</h1>
     <p>Haz clic en el siguiente botón para activar el Pop Over.</p>
 
-    <button id="btn-encuesta" style="
-        background-color: #007bff; 
-        color: white; 
-        padding: 15px 30px; 
-        font-size: 18px; 
-        border: none; 
-        cursor: pointer;
-        border-radius: 5px;">
+    <button id="btn-encuesta">
         Danos tu opinión
     </button>
+
+    <!-- ============================================= -->
+    <!-- CÓDIGO DE QUALTRICS                          -->
+    <!-- Reemplaza con tu código real                 -->
+    <!-- ============================================= -->
+    <script type='text/javascript'>
+        // ===== PEGA AQUÍ TU CÓDIGO DE QUALTRICS =====
+        // Lo obtienes de: Website/App Feedback > Distributions > Get Code
+        
+        // Ejemplo (REEMPLAZAR):
+        /*
+        (function(){
+            var g=function(e,h,f,g){
+                // ... código de Qualtrics ...
+            };
+        })();
+        */
+    </script>
+    
+    <!-- Este div es necesario para Qualtrics -->
+    <div id='ZN_xxxxxxxxxxxxx'><!--DO NOT REMOVE-CONTENTS DIRECTLY GENERATED--></div>
+
+    <!-- ============================================= -->
+    <!-- JAVASCRIPT PARA FORZAR RESPONSIVE            -->
+    <!-- ============================================= -->
+    <script>
+    (function() {
+        'use strict';
+
+        console.log('%c[Qualtrics Fix] Iniciado', 'color: #00c; font-weight: bold');
+
+        var fixApplied = false;
+
+        function applyResponsiveFix() {
+            // Lista completa de selectores posibles
+            var selectors = [
+                'div[id*="QSI_PopOver"]',
+                'div[id^="QSI"][id*="PopOver"]',
+                'div[class*="QSI"][class*="PopOver"]',
+                'div[class*="SI_PopOver"]',
+                '.QSIPopOver',
+                '#QSIPopOverContainer',
+                'div[id*="QSI"][style*="position"]'
+            ];
+
+            var container = null;
+            var iframe = null;
+
+            // Buscar el container
+            for (var i = 0; i < selectors.length; i++) {
+                var elements = document.querySelectorAll(selectors[i]);
+                for (var j = 0; j < elements.length; j++) {
+                    var el = elements[j];
+                    var potentialIframe = el.querySelector('iframe');
+                    
+                    // Verificar que tenga iframe y sea de Qualtrics
+                    if (potentialIframe) {
+                        var src = potentialIframe.getAttribute('src') || '';
+                        if (src.indexOf('qualtrics') !== -1 || src.indexOf('abc') !== -1) {
+                            container = el;
+                            iframe = potentialIframe;
+                            console.log('%c[Qualtrics Fix] Container encontrado!', 'color: #0a0; font-weight: bold');
+                            console.log('Container:', container);
+                            console.log('Iframe src:', src);
+                            break;
+                        }
+                    }
+                }
+                if (container) break;
+            }
+
+            if (!container || !iframe) {
+                return false; // No encontrado aún
+            }
+
+            var width = window.innerWidth || document.documentElement.clientWidth;
+            console.log('%c[Qualtrics Fix] Ancho pantalla: ' + width + 'px', 'color: #f90');
+
+            // MOBILE
+            if (width <= 600) {
+                console.log('%c[Qualtrics Fix] Aplicando MOBILE', 'color: #0c0; font-weight: bold');
+                
+                container.style.cssText = 
+                    'position: fixed !important;' +
+                    'width: 100vw !important;' +
+                    'max-width: 100vw !important;' +
+                    'height: 100vh !important;' +
+                    'max-height: 100vh !important;' +
+                    'top: 0 !important;' +
+                    'left: 0 !important;' +
+                    'right: 0 !important;' +
+                    'bottom: 0 !important;' +
+                    'margin: 0 !important;' +
+                    'padding: 0 !important;' +
+                    'border-radius: 0 !important;' +
+                    'transform: none !important;' +
+                    'overflow: hidden !important;' +
+                    'z-index: 2147483647 !important;';
+
+                iframe.style.cssText =
+                    'width: 100vw !important;' +
+                    'height: 100vh !important;' +
+                    'min-width: 100vw !important;' +
+                    'min-height: 100vh !important;' +
+                    'max-width: 100vw !important;' +
+                    'max-height: 100vh !important;' +
+                    'border: none !important;' +
+                    'margin: 0 !important;' +
+                    'padding: 0 !important;' +
+                    'position: absolute !important;' +
+                    'top: 0 !important;' +
+                    'left: 0 !important;';
+
+                // Remover atributos width/height del iframe
+                iframe.removeAttribute('width');
+                iframe.removeAttribute('height');
+
+                // Agrandar botón cerrar
+                var closeBtn = container.querySelector('a[onclick*="lose"], img[alt*="Close"]');
+                if (closeBtn) {
+                    var btn = closeBtn.tagName === 'IMG' ? closeBtn.parentElement : closeBtn;
+                    btn.style.cssText =
+                        'position: fixed !important;' +
+                        'top: 10px !important;' +
+                        'right: 10px !important;' +
+                        'z-index: 2147483647 !important;' +
+                        'width: 48px !important;' +
+                        'height: 48px !important;' +
+                        'background: rgba(255,255,255,0.95) !important;' +
+                        'border-radius: 50% !important;' +
+                        'display: flex !important;' +
+                        'align-items: center !important;' +
+                        'justify-content: center !important;' +
+                        'box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;';
+                }
+            }
+            // TABLET
+            else if (width <= 900) {
+                console.log('%c[Qualtrics Fix] Aplicando TABLET', 'color: #0c0; font-weight: bold');
+                
+                container.style.cssText =
+                    'width: 90vw !important;' +
+                    'max-width: 650px !important;' +
+                    'height: auto !important;' +
+                    'max-height: 90vh !important;' +
+                    'position: fixed !important;' +
+                    'left: 50% !important;' +
+                    'top: 50% !important;' +
+                    'transform: translate(-50%, -50%) !important;' +
+                    'border-radius: 12px !important;' +
+                    'overflow: hidden !important;' +
+                    'z-index: 2147483647 !important;';
+
+                iframe.style.cssText =
+                    'width: 100% !important;' +
+                    'height: 550px !important;' +
+                    'max-height: 85vh !important;' +
+                    'border: none !important;';
+            }
+            // DESKTOP
+            else {
+                console.log('%c[Qualtrics Fix] Modo DESKTOP', 'color: #00c');
+                
+                // En desktop dejamos que Qualtrics maneje, solo ajustamos iframe
+                iframe.style.cssText =
+                    'width: 100% !important;' +
+                    'height: 600px !important;' +
+                    'border: none !important;';
+            }
+
+            fixApplied = true;
+            return true;
+        }
+
+        // Observer para detectar cuando aparece el popup
+        var observer = new MutationObserver(function(mutations) {
+            if (fixApplied) return; // Ya se aplicó
+
+            for (var i = 0; i < mutations.length; i++) {
+                var added = mutations[i].addedNodes;
+                for (var j = 0; j < added.length; j++) {
+                    if (added[j].nodeType === 1) {
+                        var id = added[j].id || '';
+                        var cls = added[j].className || '';
+                        
+                        if (id.indexOf('QSI') !== -1 || cls.indexOf('QSI') !== -1) {
+                            console.log('%c[Qualtrics Fix] Elemento QSI detectado', 'color: #f90');
+                            setTimeout(applyResponsiveFix, 100);
+                            setTimeout(applyResponsiveFix, 300);
+                            setTimeout(applyResponsiveFix, 500);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
+        // Iniciar observación
+        function startObserver() {
+            if (document.body) {
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['style']
+                });
+                console.log('%c[Qualtrics Fix] Observer activo', 'color: #00c');
+            } else {
+                setTimeout(startObserver, 50);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startObserver);
+        } else {
+            startObserver();
+        }
+
+        // Ejecutar en resize
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                fixApplied = false; // Permitir re-aplicar
+                applyResponsiveFix();
+            }, 200);
+        });
+
+        // Intentos periódicos
+        var attemptCount = 0;
+        var maxAttempts = 30;
+        var attemptInterval = setInterval(function() {
+            attemptCount++;
+            
+            if (applyResponsiveFix() || attemptCount >= maxAttempts) {
+                clearInterval(attemptInterval);
+                if (attemptCount >= maxAttempts) {
+                    console.log('%c[Qualtrics Fix] Intentos agotados', 'color: #f00');
+                }
+            }
+        }, 500);
+
+    })();
+    </script>
+
+</body>
 <!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
 
 <script type='text/javascript'>
