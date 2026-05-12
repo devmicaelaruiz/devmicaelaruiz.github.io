@@ -7,26 +7,23 @@
 
     <!-- FIX BOTTOM SHEET MOBILE -->
     <script>
-    (function() {
-      function fixSheet() {
-        var el = document.getElementById('QSI_SI_bpviAo6M89ZExHU');
-        if (el) {
-          el.style.left = '0';
-          el.style.right = '0';
-          el.style.bottom = '0';
-          el.style.top = 'auto';
-          el.style.width = '100%';
-          el.style.maxWidth = '100%';
-          el.style.borderRadius = '16px 16px 0 0';
-          el.style.margin = '0';
-        } else {
-          setTimeout(fixSheet, 100);
-        }
-      }
-      document.addEventListener('DOMContentLoaded', fixSheet);
-    })();
+        (function() {
+          var observer = new MutationObserver(function() {
+            var el = document.getElementById('QSI_SI_bpviAo6M89ZExHU');
+            if (el) {
+              el.style.setProperty('left', '0', 'important');
+              el.style.setProperty('right', '0', 'important');
+              el.style.setProperty('bottom', '0', 'important');
+              el.style.setProperty('top', 'auto', 'important');
+              el.style.setProperty('width', '100%', 'important');
+              el.style.setProperty('max-width', '100%', 'important');
+              el.style.setProperty('border-radius', '16px 16px 0 0', 'important');
+              el.style.setProperty('margin', '0', 'important');
+            }
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+        })();
     </script>
-
 </head>
 <body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
     <h1>Prueba de Integración</h1>
