@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Prueba Encuesta Qualtrics</title>
+    <title>Prueba Encuesta Qualtrics Mobile</title>
     <style>
         body {
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -26,7 +28,6 @@
         Danos tu opinión
     </button>
 
-    <!-- FIX: Flush bottom para intercepto mobile de Qualtrics -->
     <!-- FIX: Flush bottom para intercepto mobile de Qualtrics -->
 <script>
 (function() {
@@ -60,6 +61,7 @@
                     modal.style.setProperty('left', '0', 'important');
                     modal.style.setProperty('right', '0', 'important');
                     modal.style.setProperty('width', '100%', 'important');
+                    // Forzamos solo esquinas superiores redondeadas
                     modal.style.setProperty('border-radius', '16px 16px 0 0', 'important');
                     modal.style.setProperty('margin', '0', 'important');
                 }
@@ -69,7 +71,7 @@
         return null;
     }
 
-    // Inyectar CSS global también (doble protección)
+    // Inyectar CSS global con el selector de hijo directo para el radio de las esquinas
     var style = document.createElement('style');
     style.innerHTML = [
         '#QSI_S_' + ZONE_ID + ',',
@@ -83,17 +85,17 @@
         '  margin: 0 !important;',
         '  width: 100% !important;',
         '  transform: none !important;',
+        '}',
+        // Este es el selector específico que pediste para forzar el border-radius
+        'div[id^="QSI_S_ZN_"] > div:first-child, #QSIWindow > div:first-child {',
+        '  border-radius: 16px 16px 0 0 !important;',
         '}'
     ].join('\n');
     document.head.appendChild(style);
 
-    // Polling continuo mientras el modal esté visible
     var interval = setInterval(flushBottom, 50);
-
-    // Detener después de 10 segundos para no consumir recursos
     setTimeout(function() { clearInterval(interval); }, 10000);
 
-    // MutationObserver como respaldo
     var observer = new MutationObserver(flushBottom);
     observer.observe(document.body, { 
         childList: true, 
@@ -109,6 +111,7 @@
     });
 })();
 </script>
+
     <!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
     <script type='text/javascript'>
         (function(){var g=function(g){
