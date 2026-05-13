@@ -5,52 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba Encuesta Qualtrics</title>
     <style>
-                /* =====================================================
-           FLUSH BOTTOM FIX — MOBILE INTERCEPT
-           Se aplica dentro del iframe de la encuesta
-           ===================================================== */
-        
-        /* Eliminar márgenes del body y html dentro del iframe */
-        html, body {
-          margin: 0 !important;
-          padding: 0 !important;
-          overflow-x: hidden !important;
-          /* Safe area iOS: el contenido no queda tapado por la barra del SO */
-          padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-        }
-        
-        /* El SkinContent es el wrapper principal — sin márgenes inferiores */
-        #SkinContent {
-          padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-          margin-bottom: 0 !important;
-        }
-        
-        /* Quitar el PushStickyFooter que Qualtrics usa para empujar el footer */
-        #PushStickyFooter {
-          display: none !important;
-          height: 0 !important;
-          min-height: 0 !important;
-        }
-        
-        /* Footer interno sin altura extra */
-        #StickyFooterWrapper,
-        #Footer {
-          padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-          margin-bottom: 0 !important;
-        }
-        
-        /* El área de botones no debe tener padding inferior extra en mobile */
-        @media (max-width: 480px) {
-          #Buttons {
-            padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)) !important;
-            margin-bottom: 0 !important;
-          }
-        
-          /* El skin completo sin margen inferior */
-          .Skin {
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
-          }
+        body {
+            background-color: black; /* También puedes usar #000 o rgb(0,0,0) */
+            color: white; /* Texto blanco para que sea legible */
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
