@@ -2,21 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Prueba Encuesta Qualtrics</title>
     <style>
         body {
-            background-color: black; /* También puedes usar #000 o rgb(0,0,0) */
-            color: white; /* Texto blanco para que sea legible */
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
         }
     </style>
 </head>
 <body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
-
     <h1>Prueba de Integración</h1>
     <p>Haz clic en el siguiente botón para activar el Pop Over mobile.</p>
-
     <button id="btn-encuesta" style="
         background-color: #007bff; 
         color: white; 
@@ -27,12 +25,78 @@
         border-radius: 5px;">
         Danos tu opinión
     </button>
+
+    <!-- FIX: Flush bottom para intercepto mobile de Qualtrics -->
+    <script>
+    (function() {
+        var ZONE_ID = 'ZN_3O7CdaWvuM7LOjY';
+
+        function flushBottom() {
+            // Selectores que Qualtrics puede usar para el contenedor
+            var selectors = [
+                '#QSI_S_' + ZONE_ID,
+                '[id^="QSI_S_' + ZONE_ID + '"]',
+                '#QSIWindow',
+                'div[id^="QSI_S_ZN_"]'
+            ];
+
+            for (var i = 0; i < selectors.length; i++) {
+                var el = document.querySelector(selectors[i]);
+                if (el) {
+                    el.style.setProperty('position', 'fixed', 'important');
+                    el.style.setProperty('bottom', '0', 'important');
+                    el.style.setProperty('top', 'auto', 'important');
+                    el.style.setProperty('left', '0', 'important');
+                    el.style.setProperty('right', '0', 'important');
+                    el.style.setProperty('margin', '0', 'important');
+                    el.style.setProperty('width', '100%', 'important');
+
+                    // Esquinas superiores redondeadas, inferiores al ras
+                    var modal = el.firstElementChild;
+                    if (modal) {
+                        modal.style.setProperty('border-radius', '16px 16px 0 0', 'important');
+                        modal.style.setProperty('bottom', '0', 'important');
+                        modal.style.setProperty('top', 'auto', 'important');
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Intentar inmediatamente y con reintentos
+        var attempts = 0;
+        var interval = setInterval(function() {
+            if (flushBottom() || ++attempts > 50) {
+                clearInterval(interval);
+            }
+        }, 100);
+
+        // También escuchar postMessage desde el iframe de la encuesta
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'QSI_FLUSH_BOTTOM') {
+                flushBottom();
+            }
+        });
+
+        // Observar el DOM para cuando Qualtrics inyecte el contenedor
+        var observer = new MutationObserver(function() {
+            if (flushBottom()) {
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    })();
+    </script>
+
     <!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
     <script type='text/javascript'>
         (function(){var g=function(g){
             this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
             this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
         try{(new g("https://zn3o7cdawvum7lojy-atlanticcity.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_3O7CdaWvuM7LOjY")).start()}catch(i){}})();
-    </script><div id='ZN_3O7CdaWvuM7LOjY'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+    </script>
+    <div id='ZN_3O7CdaWvuM7LOjY'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
     <!--END WEBSITE FEEDBACK SNIPPET-->
+</body>
 </html>
