@@ -15,7 +15,7 @@
     </style>
 </head>
 <body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px;">
-    <h1>Prueba de Integración</h1>
+    <h1>Prueba de Integración Mobile</h1>
     <p>Haz clic en el siguiente botón para activar el Pop Over mobile.</p>
     <button id="btn-encuesta" style="
         background-color: #007bff; 
@@ -29,6 +29,7 @@
     </button>
 
     <!-- FIX: Flush bottom para intercepto mobile de Qualtrics -->
+<script>
 (function() {
     var ZONE_ID = 'ZN_3O7CdaWvuM7LOjY';
 
@@ -85,6 +86,7 @@
 
     observer.observe(document.body, { childList: true, subtree: true });
 })();
+</script>
 
     <!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
     <script type='text/javascript'>
