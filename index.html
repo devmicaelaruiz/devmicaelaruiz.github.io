@@ -1,55 +1,542 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qualtrics Lab - Matriz de Creatives</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f4f7f6; padding-top: 50px; }
-        .matrix-card { border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .btn-test { width: 100%; font-size: 0.8rem; margin-bottom: 5px; }
-        th { background-color: salmon !important; color: white; text-align: center; }
-        .category-header { background-color: #e9ecef; font-weight: bold; text-align: center; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qolqan AI — Gestiona tus finanzas con inteligencia</title>
+<meta name="description" content="Qolqan AI analiza tus recibos en tiempo real y te ayuda a organizar tus finanzas y tomar mejores decisiones económicas. Validado con un estudio cuasi-experimental (d de Cohen = 0.84, p < 0.001, 120 participantes).">
+<meta name="theme-color" content="#0D1B4B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230D1B4B'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial,sans-serif' font-weight='700' fill='%23E8B84B' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Qolqan AI — Gestiona tus finanzas con inteligencia">
+<meta property="og:description" content="Plataforma de IA que analiza tus recibos en tiempo real y te ayuda a tomar mejores decisiones financieras. Validado con un estudio cuasi-experimental (d = 0.84, p < 0.001, 120 participantes).">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qolqan AI — Gestiona tus finanzas con inteligencia">
+<meta name="twitter:description" content="IA que analiza tus recibos en tiempo real y te ayuda a tomar mejores decisiones financieras.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:    #080C1A;
+    --deep:   #0D1B4B;
+    --navy:   #162254;
+    --gold:   #E8B84B;
+    --teal:   #2DD4BF;
+    --white:  #FFFFFF;
+    --off:    #F7F8FC;
+    --muted:  #8892AA;
+    --border: rgba(13,27,75,.10);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: env(safe-area-inset-top,0); left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5vw;
+    background: rgba(255,255,255,.9); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.2rem;
+    color: var(--deep); letter-spacing: -.02em; display: flex; align-items: center; gap: .5rem;
+  }
+  .logo-q {
+    width: 32px; height: 32px; background: var(--deep); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1rem; font-weight: 700;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: .88rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--deep); }
+  .nav-cta {
+    background: var(--deep); color: #fff;
+    padding: .55rem 1.3rem; border-radius: 7px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: .88rem;
+    text-decoration: none; transition: opacity .2s;
+  }
+  .nav-cta:hover { opacity: .85; }
+
+  /* HERO */
+  .hero {
+    background: var(--deep);
+    padding: 9rem 5vw 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 80% 30%, rgba(45,212,191,.12) 0%, transparent 65%),
+      radial-gradient(ellipse 35% 45% at 15% 70%, rgba(232,184,75,.09) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; padding-bottom: 5rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(45,212,191,.12); border: 1px solid rgba(45,212,191,.25);
+    color: var(--teal); font-size: .78rem; font-weight: 500;
+    padding: .35rem .9rem; border-radius: 20px; margin-bottom: 2rem;
+  }
+  .badge-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: -.04em;
+    color: #fff; margin-bottom: 1.5rem;
+  }
+  h1 .accent { color: var(--gold); }
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(255,255,255,.6);
+    line-height: 1.75; max-width: 44ch; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold); color: var(--ink);
+    padding: .9rem 2rem; border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem;
+    text-decoration: none; transition: filter .2s;
+  }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,.2); color: rgba(255,255,255,.8);
+    padding: .9rem 2rem; border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 1rem;
+    text-decoration: none; transition: border-color .2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,.5); }
+
+  /* Hero image mockup */
+  .hero-visual {
+    position: relative; align-self: end;
+  }
+  .mockup-shell {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.10);
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .mockup-bar {
+    background: rgba(255,255,255,.06);
+    padding: .7rem 1rem;
+    display: flex; align-items: center; gap: .5rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+  .mockup-content { padding: 1.5rem; }
+  .mock-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.2rem;
+  }
+  .mock-title { font-family: 'Space Grotesk',sans-serif; font-size: .95rem; font-weight: 600; color: rgba(255,255,255,.9); }
+  .mock-badge { background: rgba(45,212,191,.15); color: var(--teal); font-size: .72rem; padding: .2rem .6rem; border-radius: 4px; }
+  .mock-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; margin-bottom: 1.2rem; }
+  .mock-stat {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px; padding: .9rem;
+  }
+  .mock-stat-val { font-family: 'Space Grotesk',sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; }
+  .mock-stat-lab { font-size: .7rem; color: rgba(255,255,255,.4); margin-top: .2rem; }
+  .mock-bar-section { margin-bottom: 1rem; }
+  .mock-bar-title { font-size: .72rem; color: rgba(255,255,255,.4); margin-bottom: .6rem; display: flex; justify-content: space-between; }
+  .mock-track { background: rgba(255,255,255,.08); height: 6px; border-radius: 3px; overflow: hidden; }
+  .mock-fill-gold { height: 100%; background: var(--gold); border-radius: 3px; }
+  .mock-fill-teal { height: 100%; background: var(--teal); border-radius: 3px; }
+  .mock-fill-blue { height: 100%; background: #6B8CFF; border-radius: 3px; }
+  .mock-courses { margin-top: 1rem; }
+  .mock-course {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 8px; padding: .75rem 1rem;
+    display: flex; align-items: center; gap: .8rem;
+    margin-bottom: .6rem;
+  }
+  .mock-course-icon { width: 32px; height: 32px; border-radius: 7px; background: rgba(232,184,75,.2); display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; }
+  .mock-course-name { font-family: 'Space Grotesk',sans-serif; font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.85); }
+  .mock-course-sub { font-size: .7rem; color: rgba(255,255,255,.4); }
+  .mock-progress-bar { margin-left: auto; width: 50px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+  .mock-progress-fill { height: 100%; background: var(--teal); }
+
+  /* STATS BAND */
+  .stats-band {
+    background: var(--off);
+    padding: 3.5rem 5vw;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; border-bottom: 1px solid var(--border);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -.04em;
+    color: var(--deep);
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-desc { font-size: .85rem; color: var(--muted); margin-top: .3rem; }
+
+  /* FEATURES */
+  .features { padding: 6rem 5vw; background: var(--white); }
+  .section-label { font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; color: var(--ink); }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .feat {
+    padding: 2rem; border: 1px solid var(--border); border-radius: 14px;
+    transition: border-color .2s, transform .15s;
+  }
+  .feat:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .feat-icon {
+    width: 46px; height: 46px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1.2rem;
+  }
+  .feat-icon.blue { background: rgba(13,27,75,.07); }
+  .feat-icon.gold { background: rgba(232,184,75,.12); }
+  .feat-icon.teal { background: rgba(45,212,191,.1); }
+  .feat h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: .5rem; }
+  .feat p { font-size: .88rem; color: #666; line-height: 1.65; }
+
+  /* LEARNING */
+  .learning { background: var(--off); padding: 6rem 5vw; }
+  .learning-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 3.5rem;
+  }
+  .learning-copy p { font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 1.2rem; max-width: 46ch; }
+  .course-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .course-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.4rem 1.6rem;
+    display: flex; gap: 1.2rem; align-items: center;
+  }
+  .cc-icon {
+    width: 44px; height: 44px; border-radius: 9px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--deep), #2B44A8);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .cc-body { flex: 1; }
+  .cc-label { font-size: .7rem; color: var(--teal); font-weight: 600; letter-spacing: .06em; margin-bottom: .2rem; }
+  .cc-title { font-family: 'Space Grotesk', sans-serif; font-size: .95rem; font-weight: 600; color: var(--ink); margin-bottom: .2rem; }
+  .cc-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+  .cc-arrow { color: var(--muted); font-size: 1.1rem; flex-shrink: 0; }
+  .learning-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+  .tag {
+    background: rgba(13,27,75,.07); color: var(--deep);
+    font-size: .78rem; font-weight: 500;
+    padding: .35rem .85rem; border-radius: 20px;
+  }
+
+  /* HOW IT WORKS */
+  .how { background: var(--deep); padding: 6rem 5vw; }
+  .how h2 { color: #fff; margin-bottom: .8rem; }
+  .how-sub { font-size: 1rem; color: rgba(255,255,255,.55); max-width: 50ch; margin-bottom: 3.5rem; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .step { position: relative; }
+  .step-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3.5rem; font-weight: 700; letter-spacing: -.05em;
+    color: rgba(255,255,255,.07); line-height: 1; margin-bottom: .8rem;
+  }
+  .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: .6rem; }
+  .step p { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.7; }
+  .step-line {
+    position: absolute; top: 1.7rem; left: 4rem; right: -2rem; height: 1px;
+    background: rgba(255,255,255,.08);
+  }
+  .steps .step:last-child .step-line { display: none; }
+
+  /* CTA */
+  .cta { background: var(--gold); padding: 5.5rem 5vw; text-align: center; }
+  .cta h2 { color: var(--ink); font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: 1rem; }
+  .cta p { color: rgba(8,12,26,.6); font-size: 1.05rem; max-width: 48ch; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .btn-dark {
+    background: var(--ink); color: #fff;
+    padding: 1rem 2.5rem; border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem;
+    text-decoration: none; display: inline-block; transition: opacity .2s;
+  }
+  .btn-dark:hover { opacity: .85; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); padding: 2rem 5vw;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .f-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: rgba(255,255,255,.5); font-size: 1rem; display: flex; align-items: center; gap: .5rem; }
+  .f-logo-q { width: 26px; height: 26px; background: rgba(232,184,75,.2); border-radius: 6px; display:flex;align-items:center;justify-content:center; color:var(--gold); font-size:.8rem; font-weight:700; }
+  footer p { font-size: .8rem; color: rgba(255,255,255,.25); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-bottom: 3rem; }
+    .hero-visual { display: none; }
+    .stats-band { grid-template-columns: repeat(2, 1fr); }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .learning-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .steps { grid-template-columns: 1fr; }
+    .step-line { display: none; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 560px) {
+    .stats-band { grid-template-columns: 1fr 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
 </head>
 <body>
 
-<div class="container">
-    <div class="row mb-4">
-        <div class="col-12 text-center">
-            <h1 class="display-5 fw-bold text-primary">Laboratorio de Interceptos Qualtrics</h1>
-            <p class="lead">Casos de Prueba</p>
-        </div>
-    </div>
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-q">Q</div>
+    Qolqan AI
+  </div>
+  <ul class="nav-links">
+    <li><a href="#funciones">Funciones</a></li>
+    <li><a href="#aprendizaje">Aprendizaje</a></li>
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+  </ul>
+  <a href="https://qolqan-final-tesis.vercel.app/dashboard" class="nav-cta" target="_blank">Empieza gratis</a>
+</nav>
 
-    <div class="card matrix-card">
-        <div class="card-body p-0">
-            <table class="table table-bordered mb-0">
-                <thead>
-                    <tr>
-                        <th rowspan="2" class="align-middle">Active Creatives</th>
-                        <th colspan="2">Intercepts</th>
-                    </tr>
-                    <tr>
-                        <th class="category-header">Web</th>
-                        <th class="category-header">Mobile</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="fw-bold">Pop Over</td>
-                        <td><a href="category/pop-over.html" class="btn btn-outline-primary btn-test">Abrir</a></td>
-                        <td><a href="category/pop-over-mobile.html" class="btn btn-outline-success btn-test">Abrir</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="badge"><span class="badge-dot"></span> Plataforma financiera con IA</div>
+    <h1>Gestiona tus finanzas<br>con <span class="accent">inteligencia.</span></h1>
+    <p class="hero-sub">
+      Rastrea, analiza y optimiza tus finanzas sin esfuerzo. Qolqan AI aprende de tus hábitos y te da las herramientas para tomar mejores decisiones — en minutos, no en meses.
+    </p>
+    <div class="hero-actions">
+      <a href="https://qolqan-final-tesis.vercel.app/dashboard" class="btn-gold" target="_blank">Empieza gratis</a>
+      <a href="#aprendizaje" class="btn-outline">Ver micro-cursos</a>
     </div>
+  </div>
+
+  <!-- MOCKUP -->
+  <div class="hero-visual">
+    <div class="mockup-shell">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="mockup-content">
+        <div class="mock-header">
+          <span class="mock-title">Panel financiero</span>
+          <span class="mock-badge">IA activa</span>
+        </div>
+        <div class="mock-stat-row">
+          <div class="mock-stat">
+            <div class="mock-stat-val">S/ 4,280</div>
+            <div class="mock-stat-lab">Balance total</div>
+          </div>
+          <div class="mock-stat">
+            <div class="mock-stat-val" style="color:var(--teal)">+12%</div>
+            <div class="mock-stat-lab">vs. mes anterior</div>
+          </div>
+          <div class="mock-stat">
+            <div class="mock-stat-val" style="color:var(--gold)">S/ 830</div>
+            <div class="mock-stat-lab">Ahorro del mes</div>
+          </div>
+        </div>
+        <div class="mock-bar-section">
+          <div class="mock-bar-title"><span>Alimentación</span><span>42%</span></div>
+          <div class="mock-track"><div class="mock-fill-gold" style="width:42%"></div></div>
+        </div>
+        <div class="mock-bar-section">
+          <div class="mock-bar-title"><span>Transporte</span><span>28%</span></div>
+          <div class="mock-track"><div class="mock-fill-teal" style="width:28%"></div></div>
+        </div>
+        <div class="mock-bar-section">
+          <div class="mock-bar-title"><span>Entretenimiento</span><span>18%</span></div>
+          <div class="mock-track"><div class="mock-fill-blue" style="width:18%"></div></div>
+        </div>
+        <div class="mock-courses">
+          <div class="mock-course">
+            <div class="mock-course-icon">📘</div>
+            <div>
+              <div class="mock-course-name">Educación Financiera Básica</div>
+              <div class="mock-course-sub">MICRO-LEARNING · 0% completado</div>
+            </div>
+            <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:0%"></div></div>
+          </div>
+          <div class="mock-course">
+            <div class="mock-course-icon">💰</div>
+            <div>
+              <div class="mock-course-name">Fundamentos de Ahorro</div>
+              <div class="mock-course-sub">MICRO-LEARNING · 0% completado</div>
+            </div>
+            <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat-item">
+    <div class="stat-num">d<span> = 0.84</span></div>
+    <div class="stat-desc">Efecto grande — validado con d de Cohen</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">+2<span>.13 pts</span></div>
+    <div class="stat-desc">Mejora sobre el grupo control (escala 0–20)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">p<span> &lt; 0.001</span></div>
+    <div class="stat-desc">Significancia estadística — prueba t de Student</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">120</div>
+    <div class="stat-desc">Participantes en estudio cuasiexperimental</div>
+  </div>
 </div>
 
-<footer class="text-center mt-5 text-muted">
-    <small>Ticket 3051</small>
+<!-- FEATURES -->
+<section class="features" id="funciones">
+  <div class="section-label">Funciones</div>
+  <h2>Todo lo que necesitas<br>en un solo lugar.</h2>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-icon blue">📊</div>
+      <h3>Analítica avanzada</h3>
+      <p>Información detallada sobre tus patrones de gasto con análisis impulsados por IA. Entiende a dónde va tu dinero sin hacer nada manual.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon gold">📷</div>
+      <h3>Escáner de recibos</h3>
+      <p>Fotografía un recibo y Qolqan extrae automáticamente el monto, la categoría y la fecha. Sin tipear, sin errores.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon teal">🎯</div>
+      <h3>Planificación de presupuesto</h3>
+      <p>Crea y gestiona presupuestos con recomendaciones inteligentes que se ajustan a tu comportamiento real, no a un ideal genérico.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon blue">💳</div>
+      <h3>Soporte multicuenta</h3>
+      <p>Conecta y visualiza múltiples cuentas bancarias y tarjetas de crédito en un solo panel centralizado.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon gold">🌎</div>
+      <h3>Multimoneda</h3>
+      <p>Gestiona finanzas en diferentes monedas con conversión en tiempo real. Ideal para quienes trabajan con más de una divisa.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon teal">🤖</div>
+      <h3>Recomendaciones personalizadas</h3>
+      <p>Recibe sugerencias automáticas basadas en tus datos reales: qué reducir, cuánto ahorrar, qué priorizar cada mes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING -->
+<section class="learning" id="aprendizaje">
+  <div class="section-label">Centro de aprendizaje</div>
+  <div class="learning-layout">
+    <div class="learning-copy">
+      <h2>Aprende mientras<br>gestionas.</h2>
+      <p style="margin-top:1.2rem">Qolqan no solo te muestra tus números — te enseña a entenderlos. El Centro de Aprendizaje integra micro-cursos prácticos directamente en tu experiencia financiera.</p>
+      <p>Cursos diseñados para completarse en minutos, no horas. Sin teoría innecesaria: solo lo que necesitas para tomar mejores decisiones hoy.</p>
+      <div class="learning-tags">
+        <span class="tag">Presupuestos</span>
+        <span class="tag">Ahorro</span>
+        <span class="tag">Deudas</span>
+        <span class="tag">Inversión básica</span>
+        <span class="tag">Educación financiera</span>
+      </div>
+    </div>
+    <div class="course-cards">
+      <div class="course-card">
+        <div class="cc-icon">📘</div>
+        <div class="cc-body">
+          <div class="cc-label">MICRO-LEARNING · Qolqan Academy</div>
+          <div class="cc-title">Educación Financiera Básica</div>
+          <div class="cc-desc">Domina tus finanzas personales desde cero: presupuesto, ahorro y salida de deudas con pasos simples.</div>
+        </div>
+        <div class="cc-arrow">→</div>
+      </div>
+      <div class="course-card">
+        <div class="cc-icon">💰</div>
+        <div class="cc-body">
+          <div class="cc-label">MICRO-LEARNING · Qolqan Academy</div>
+          <div class="cc-title">Fundamentos de Ahorro</div>
+          <div class="cc-desc">Construye el hábito del ahorro con estrategias concretas adaptadas a tu nivel de ingresos actual.</div>
+        </div>
+        <div class="cc-arrow">→</div>
+      </div>
+      <div class="course-card" style="border-style:dashed; opacity:.55">
+        <div class="cc-icon" style="background:rgba(139,146,170,.1)">🔒</div>
+        <div class="cc-body">
+          <div class="cc-label">PRÓXIMAMENTE</div>
+          <div class="cc-title">Inversión para principiantes</div>
+          <div class="cc-desc">Cómo hacer crecer tu dinero sin necesidad de conocimientos previos en mercados financieros.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="como-funciona">
+  <div class="section-label" style="color:var(--teal)">Cómo funciona</div>
+  <h2>En tres pasos.</h2>
+  <p class="how-sub">Sin curvas de aprendizaje. Sin configuraciones complicadas. Empiezas a ver resultados desde el primer día.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-line"></div>
+      <h3>Crea tu cuenta</h3>
+      <p>Registro simple y seguro en minutos. Qolqan configura tu perfil financiero desde el inicio para personalizar tu experiencia.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-line"></div>
+      <h3>Rastrea tus gastos</h3>
+      <p>Escanea recibos o registra transacciones. La IA categoriza automáticamente y construye una visión clara de tus finanzas en tiempo real.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Obtén perspectivas</h3>
+      <p>Recibe recomendaciones accionables y accede al centro de aprendizaje para tomar decisiones financieras más inteligentes cada mes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>¿Listo para tomar el control<br>de tus finanzas?</h2>
+  <p>Únete a miles de usuarios que ya gestionan sus finanzas de forma más inteligente con Qolqan AI.</p>
+  <a href="https://qolqan-final-tesis.vercel.app/dashboard" class="btn-dark" target="_blank">Empieza gratis</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">
+    <div class="f-logo-q">Q</div>
+    Qolqan AI
+  </div>
+  <p>Plataforma de gestión financiera impulsada por IA · Lima, Perú</p>
 </footer>
 
 </body>
